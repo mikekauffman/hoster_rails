@@ -1,1 +1,39 @@
-Welcome
+  <h1 class="Three-Dee">ⓗoster</h1>
+<form class="pure-form" style="text-align: center" action="/parties/new" method="post">
+  Party Name: <input style="width: 9em" type="text" name="party_name">
+  Party Size: <input style="width: 4em" type="number" name="party_size">
+  Phone Number: <input style="width: 9em" type="number" name="party_phone">
+  <button type="submit" class="pure-button pure-button-primary">Submit</button>
+</form>
+<table class="pure-table pure-table-bordered" align="center" style="margin-top:5%; background-color:whitesmoke">
+  <thead>
+  <tr style="text-align: center">
+    <th>Party Name</th>
+    <th>Size</th>
+    <th>Phone</th>
+    <th>Wait Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @parties.each do |party| %>
+      <tr>
+        <td><%= party.name %></td>
+        <td><%= party.size %></td>
+        <td><%= party.phone %></td>
+        <td><%= party.wait_time %> minutes</td>
+        <td>
+          <form style="display: inline" action="/<%= party.id %>/delete" method="post">
+            <button class="remove-button"
+                    type="submit">Remove
+            </button>
+          </form>
+          <form style="display: inline" action="/<%= party.phone %>/text" method="post">
+            <button class="text-button"
+                    type="submit">Text Party
+            </button>
+          </form>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
