@@ -20,6 +20,18 @@ class PartiesController < ApplicationController
     redirect_to '/'
   end
 
+  def stats
+    waited_for = []
+    parties = Party.all
+    parties.each do |party|
+      waited_for << (party.updated_at - party.created_at)
+    end
+    wait_sum = 0
+    waited_for.each do |x|
+      wait_sum += x
+    end
+    @total_average_wait = (wait_sum/waited_for.count)
+  end
 private
 
   def find_by_id
