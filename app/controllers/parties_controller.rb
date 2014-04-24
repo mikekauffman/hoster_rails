@@ -21,17 +21,9 @@ class PartiesController < ApplicationController
   end
 
   def stats
-    waited_for = []
-    parties = Party.all
-    parties.each do |party|
-      waited_for << (party.updated_at - party.created_at)
-    end
-    wait_sum = 0
-    waited_for.each do |x|
-      wait_sum += x
-    end
-    @total_average_wait = (wait_sum/waited_for.count)
+    @total_average_wait = total_avg_wait
   end
+
 private
 
   def find_by_id
@@ -47,6 +39,19 @@ private
                                    :to => phone,
                                    :body => 'Your table is ready'
                                  })
+  end
+
+  def total_avg_wait
+    waited_for = []
+    parties = Party.all
+    parties.each do |party|
+      waited_for << (party.updated_at - party.created_at)
+    end
+    wait_sum = 0
+    waited_for.each do |x|
+      wait_sum += x
+    end
+    (wait_sum/waited_for.count)
   end
 
 end
