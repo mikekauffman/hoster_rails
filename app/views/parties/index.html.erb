@@ -12,17 +12,19 @@
     <th>Size</th>
     <th>Phone</th>
     <th>Wait Time</th>
+    <th>Seat / Text Party</th>
   </tr>
   </thead>
   <tbody>
   <% @parties.each do |party| %>
+  <% if party.display %>
       <tr>
         <td><%= party.name %></td>
         <td><%= party.size %></td>
         <td><%= party.phone %></td>
         <td><%= party.wait_time %> minutes</td>
         <td>
-          <form style="display: inline" action="/<%= party.id %>/delete" method="post">
+          <form style="display: inline" action="/<%= party.id %>/remove" method="post">
             <button class="remove-button"
                     type="submit">Remove
             </button>
@@ -34,6 +36,7 @@
           </form>
         </td>
       </tr>
+  <% end %>
   <% end %>
   </tbody>
 </table>

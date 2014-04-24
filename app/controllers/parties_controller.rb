@@ -14,4 +14,10 @@ class PartiesController < ApplicationController
     redirect_to '/'
   end
 
+  def remove_from_list
+    party = Party.find(params[:id])
+    party.update(display: false)
+    redirect_to '/'
+  end
+
 end
