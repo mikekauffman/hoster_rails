@@ -16,11 +16,10 @@
   </tr>
   </thead>
   <tbody>
-  <% if @parties %>
-      <% @parties.each do |party| %>
-          <tr>
-            <% if party.display %>
-                <td><%= party.name %></td>
+      <% @parties.each do |party| if @parties %>
+            <% if party.display? %>
+              <tr>
+              <td><%= party.name %></td>
                 <td><%= party.size %></td>
                 <td><%= party.phone %></td>
                 <td><%= party.wait_time %> minutes</td>
