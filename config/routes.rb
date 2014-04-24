@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/', to: 'parties#index'
   post '/parties/new', to: 'parties#create'
   post '/:id/remove', to: 'parties#remove_from_list'
+  post '/:id/text', to: 'parties#text'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

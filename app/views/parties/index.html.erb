@@ -16,27 +16,29 @@
   </tr>
   </thead>
   <tbody>
-  <% @parties.each do |party| %>
-  <% if party.display %>
-      <tr>
-        <td><%= party.name %></td>
-        <td><%= party.size %></td>
-        <td><%= party.phone %></td>
-        <td><%= party.wait_time %> minutes</td>
-        <td>
-          <form style="display: inline" action="/<%= party.id %>/remove" method="post">
-            <button class="remove-button"
-                    type="submit">Remove
-            </button>
-          </form>
-          <form style="display: inline" action="/<%= party.phone %>/text" method="post">
-            <button class="text-button"
-                    type="submit">Text Party
-            </button>
-          </form>
-        </td>
-      </tr>
-  <% end %>
+  <% if @parties %>
+      <% @parties.each do |party| %>
+          <tr>
+            <% if party.display %>
+                <td><%= party.name %></td>
+                <td><%= party.size %></td>
+                <td><%= party.phone %></td>
+                <td><%= party.wait_time %> minutes</td>
+                <td>
+                  <form style="display: inline" action="/<%= party.id %>/remove" method="post">
+                    <button class="remove-button"
+                            type="submit">Remove
+                    </button>
+                  </form>
+                  <form style="display: inline" action="/<%= party.id %>/text" method="post">
+                    <button class="text-button"
+                            type="submit">Text Party
+                    </button>
+                  </form>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
   <% end %>
   </tbody>
 </table>
