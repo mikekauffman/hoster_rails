@@ -32,7 +32,7 @@ feature 'Interacting with the application' do
 
   end
 
-  scenario 'Stats page displays average wait time overall' do
+  scenario 'Stats page displays average total wait time and average wait time per day of the week' do
 
     visit '/'
     fill_in 'party_name', with: 'Kauffman'
@@ -59,6 +59,14 @@ feature 'Interacting with the application' do
 
     expect(page).to have_content 'Average Wait Time'
     expect(page).to have_content '0 minutes'
+
+    expect(page).to have_content 'Monday'
+    expect(page).to have_content 'Tuesday'
+    expect(page).to have_content 'Wednesday'
+    expect(page).to have_content 'Thursday'
+    expect(page).to have_content 'Friday'
+    expect(page).to have_content 'Saturday'
+    expect(page).to have_content 'Sunday'
 
   end
 

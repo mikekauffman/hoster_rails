@@ -1,5 +1,16 @@
 <div>
   <h1 style="color: darkred; text-align: center">
-    Average Wait Time : <%=@total_average_wait.to_i%> minutes
+    Total Average Wait Time : <%= @total_average_wait.to_i %> minutes
   </h1>
+  <% @day_avgs_hash.each do |k, v| %>
+      <% if v != "No data for #{k} yet" %>
+          <h2>
+            Average wait on a <%= k %> : <%= v %> minutes
+          </h2>
+      <% else %>
+          <h2>
+            <%= v %>
+          </h2>
+      <% end %>
+  <% end %>
 </div>
