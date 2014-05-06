@@ -9,12 +9,18 @@ class PartiesController < ApplicationController
   end
 
   def create
-    Party.create(name: params[:party_name], size: params[:party_size], phone: params[:party_phone])
+    Party.create(
+      name: params[:party_name],
+      size: params[:party_size],
+      phone: params[:party_phone],
+      day_of_week: (Date::DAYNAMES[Date.today.wday]),
+      quoted_wait_time: params[:party_est_wait]
+    )
     redirect_to '/'
   end
 
   def remove_from_list
-    find_by_id.update(display: false, day_of_week: (Date::DAYNAMES[find_by_id.created_at.wday]))
+    find_by_id.update(display: false, seated_time: Time.now)
     redirect_to '/'
   end
 
@@ -26,6 +32,7 @@ class PartiesController < ApplicationController
   def stats
     @total_average_wait = total_avg_wait
     @day_avgs_hash = days_of_week.zip(day_avgs).to_h
+    @total_avg_quoted = quoted_avg_wait
   end
 
   private
@@ -49,13 +56,13 @@ class PartiesController < ApplicationController
     waited_for = []
     parties = Party.all
     parties.each do |party|
-      waited_for << (party.updated_at - party.created_at)
+      waited_for << (party.seated_time - party.created_at)
     end
     wait_sum = 0
     waited_for.each do |x|
       wait_sum += x
     end
-    (wait_sum/waited_for.count)
+    ((wait_sum/waited_for.count)/60).to_i
   end
 
   def average_wait_per_day(day)
@@ -63,7 +70,7 @@ class PartiesController < ApplicationController
     day_array = []
     parties.each do |party|
       if party.day_of_week == day
-        day_array << (party.updated_at - party.created_at)
+        day_array << (party.seated_time - party.created_at)
       end
     end
     day_sum = 0
@@ -71,7 +78,7 @@ class PartiesController < ApplicationController
       day_sum += x if x > 0
     end
     if day_array.count > 0
-      (day_sum/day_array.count).to_i
+      ((day_sum/day_array.count)/60).to_i
     else
       "No data for #{day} yet"
     end
@@ -87,6 +94,19 @@ class PartiesController < ApplicationController
       day_avg_array << average_wait_per_day(day)
     end
     day_avg_array
+  end
+
+  def quoted_avg_wait
+    quoted = []
+    parties = Party.all
+    parties.each do |party|
+      quoted << ((party.quoted_wait_time).to_i)
+    end
+    quoted_sum = 0
+    quoted.each do |x|
+      quoted_sum += x
+    end
+    ((quoted_sum/quoted.count)).to_i
   end
 
 end

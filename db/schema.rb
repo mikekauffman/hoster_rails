@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424233150) do
+ActiveRecord::Schema.define(version: 20140425195324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20140424233150) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "display",     default: true
+    t.boolean  "display",          default: true
     t.string   "day_of_week"
+    t.datetime "seated_time"
+    t.string   "quoted_wait_time"
   end
 
 end

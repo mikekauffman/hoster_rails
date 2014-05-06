@@ -1,46 +1,69 @@
 <h1 class="Three-Dee">ⓗoster</h1>
-<form class="pure-form" style="text-align: center" action="/parties/new" method="post">
-  Party Name: <input style="width: 9em" type="text" name="party_name">
-  Party Size: <input style="width: 4em" type="number" name="party_size">
-  Phone Number: <input style="width: 9em" type="text" name="party_phone">
-  <button type="submit" class="pure-button pure-button-primary">Submit</button>
-</form>
-<table class="pure-table pure-table-bordered" align="center" style="margin-top:5%; background-color:whitesmoke">
-  <thead>
-  <tr style="text-align: center">
-    <th>Party Name</th>
-    <th>Size</th>
-    <th>Phone</th>
-    <th>Wait Time</th>
-    <th>Seat / Text Party</th>
-  </tr>
-  </thead>
-  <tbody>
-      <% @parties.each do |party| if @parties %>
+<div style="display: inline-block; vertical-align: top; padding-right: 4%; padding-left: 1%">
+  <form class="pure-form pure-form-aligned" action="/parties/new" method="post">
+    <fieldset style="padding-top: 0">
+      <div class="pure-control-group">
+        <input name="party_name" type="text" placeholder="Party Name">
+      </div>
+
+      <div class="pure-control-group">
+        <input name="party_size" type="text" placeholder="Party Size">
+      </div>
+
+      <div class="pure-control-group">
+        <input name="party_phone" type="text" placeholder="Phone Number">
+      </div>
+
+      <div class="pure-control-group">
+        <input name="party_est_wait" type="text" placeholder="Quoted Wait Time in Minutes">
+      </div>
+
+      <div style="padding-left: 30%">
+        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div style="display: inline-block; vertical-align: top; width: 65%">
+  <table class="pure-table pure-table-bordered" style="background-color:whitesmoke; width: 100%">
+    <thead>
+    <tr style="text-align: center">
+      <th>Party Name</th>
+      <th>Size</th>
+      <th>Phone</th>
+      <th>Wait Time</th>
+      <th>Quoted Wait</th>
+      <th>Seat / Text Party</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @parties.each do |party|
+      if @parties %>
             <% if party.display? %>
-              <tr>
-              <td><%= party.name %></td>
-                <td><%= party.size %></td>
-                <td><%= party.phone %></td>
-                <td><%= party.wait_time %> minutes</td>
-                <td>
-                  <form style="display: inline" action="/<%= party.id %>/remove" method="post">
-                    <button class="remove-button"
-                            type="submit">Remove
-                    </button>
-                  </form>
-                  <form style="display: inline" action="/<%= party.id %>/text" method="post">
-                    <button class="text-button"
-                            type="submit">Text Party
-                    </button>
-                  </form>
-                </td>
-              </tr>
+                <tr>
+                  <td><%= party.name %></td>
+                  <td><%= party.size %></td>
+                  <td><%= party.phone %></td>
+                  <% if ((party.quoted_wait_time.to_i) - party.wait_time) <= 2 %>
+                      <td style="color: red; font-weight: bold"><%= party.wait_time %> minutes</td>
+                  <% else %>
+                      <td><%= party.wait_time %> minutes</td>
+                  <% end %>
+                  <td><%= party.quoted_wait_time %> minutes</td>
+                  <td style="padding: 0">
+                    <div style="text-align: center; width: inherit">
+                    <a class="button-xsmall pure-button" href="/<%= party.id %>/remove">Remove</a>
+                    <a class="button-xsmall pure-button" href="/<%= party.id %>/text">Text Party</a>
+                    </div>
+                  </td>
+                </tr>
             <% end %>
-      <% end %>
-  <% end %>
-  </tbody>
-</table>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
 <footer>
   <a href="/stats">stats</a>
 </footer>

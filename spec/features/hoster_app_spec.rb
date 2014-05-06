@@ -32,7 +32,7 @@ feature 'Interacting with the application' do
 
   end
 
-  scenario 'Stats page displays average total wait time and average wait time per day of the week' do
+  scenario 'Stats page displays average total wait time, average wait time per day, and wait time prediction averages' do
 
     visit '/'
     fill_in 'party_name', with: 'Kauffman'
@@ -55,9 +55,15 @@ feature 'Interacting with the application' do
     expect(page).to have_content '5554445555'
     expect(page).to have_content '0 minutes'
 
+    page.first(:button, "Remove").click
+    page.first(:button, "Remove").click
+
     click_on 'stats'
 
-    expect(page).to have_content 'Average Wait Time'
+    expect(page).to have_content 'Total Average Wait Time'
+    expect(page).to have_content '0 minutes'
+
+    expect(page).to have_content 'Total Average Quoted Wait Time'
     expect(page).to have_content '0 minutes'
 
     expect(page).to have_content 'Monday'

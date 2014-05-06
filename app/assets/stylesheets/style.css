@@ -10,6 +10,17 @@
 body{
     margin-top: 0;
 }
+
+.button-xsmall {
+    font-size: 70%;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    padding-left: 8%;
+    padding-right: 8%;
+    margin: .5%;
+}
+
 .remove-button {
     font-family: Georgia;
     font-size: 15px;
@@ -33,7 +44,9 @@ html {
     -o-background-size: cover;
     background-size: cover;
 }
-
+tr {
+    text-align: center;
+}
 form.formclass{
     float:right;
     margin:10px 0 0 0;
