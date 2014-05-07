@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mikekauffman/album-blast.svg?branch=master)](https://travis-ci.org/mikekauffman/album-blast) [![Code Climate](https://codeclimate.com/github/mikekauffman/album-blast.png)](https://codeclimate.com/github/mikekauffman/album-blast)
+[![Build Status](https://travis-ci.org/mikekauffman/hoster_rails.svg?branch=master)](https://travis-ci.org/mikekauffman/hoster_rails) [![Code Climate](https://codeclimate.com/github/mikekauffman/hoster_rails.png)](https://codeclimate.com/github/mikekauffman/hoster_rails)
 
 HOSTER
 ======
