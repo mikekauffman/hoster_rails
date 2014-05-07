@@ -25,7 +25,7 @@ feature 'Interacting with the application' do
     expect(page).to have_content '5554445555'
     expect(page).to have_content '0 minutes'
 
-    page.first(:button, "Remove").click
+    page.first(:link, "Remove").click
 
     expect(page).to_not have_content 'Kauffman'
     expect(page).to have_content 'Skaff'
@@ -55,15 +55,15 @@ feature 'Interacting with the application' do
     expect(page).to have_content '5554445555'
     expect(page).to have_content '0 minutes'
 
-    page.first(:button, "Remove").click
-    page.first(:button, "Remove").click
+    page.first(:link, "Remove").click
+    page.first(:link, "Remove").click
 
     click_on 'stats'
 
     expect(page).to have_content 'Total Average Wait Time'
     expect(page).to have_content '0 minutes'
 
-    expect(page).to have_content 'Total Average Quoted Wait Time'
+    expect(page).to have_content 'Total Average Quoted Wait'
     expect(page).to have_content '0 minutes'
 
     expect(page).to have_content 'Monday'
