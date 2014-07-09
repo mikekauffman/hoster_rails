@@ -31,7 +31,7 @@ class PartiesController < ApplicationController
 
   def stats
     @total_average_wait = total_avg_wait
-    @day_avgs_hash = days_of_week.zip(day_avgs).to_h
+    @day_avgs_hash = Hash[days_of_week.zip(day_avgs)]
     @total_avg_quoted = quoted_avg_wait
   end
 
