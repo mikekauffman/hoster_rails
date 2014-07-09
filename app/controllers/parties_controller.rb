@@ -108,5 +108,4 @@ class PartiesController < ApplicationController
     end
     ((quoted_sum/quoted.count)).to_i
   end
-
 end
